@@ -22,7 +22,7 @@ const markdown = markdownIt({
     if (lang && hljs.getLanguage(lang)) {
       try {
         return (
-          `<div class="whitespace-pre-line w-full hljs ${theme} light:border-solid light:border light:border-gray-700 rounded-lg px-4 pb-4 relative font-mono font-normal text-sm text-slate-200">
+          `<div class="whitespace-pre-line w-full hljs  ${theme} light:border-solid light:border code-container rounded-lg px-4 pb-4 relative font-mono font-normal text-sm text-slate-200">
             <div class="w-full flex items-center absolute top-0 left-0 text-slate-200 code-header bg-stone-800 px-4 py-2 text-xs font-sans justify-between rounded-t-md">
               <div class="flex gap-2">
                 <code class="text-xs">${lang || ""}</code>
@@ -40,12 +40,12 @@ const markdown = markdownIt({
     }
 
     return (
-      `<div class="whitespace-pre-line w-full hljs ${theme} light:border-solid light:border light:border-gray-700 rounded-lg px-4 pb-4 relative font-mono font-normal text-sm text-slate-200">
+      `<div class="whitespace-pre-line w-full hljs ${theme} light:border-solid light:border code-container rounded-lg px-4 pb-4 relative font-mono font-normal text-sm text-slate-200">
         <div class="w-full flex items-center absolute top-0 left-0 text-slate-200 bg-stone-800 px-4 py-2 text-xs font-sans justify-between rounded-t-md">
           <div class="flex gap-2"><code class="text-xs"></code></div>
           <button data-code-snippet data-code="code-${uuid}" class="flex items-center gap-x-1">
             <svg stroke="currentColor" fill="none" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round" class="h-3 w-3" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect></svg>
-            <p class="text-xs" style="margin: 0px;padding: 0px;">Copy block</p>
+            <p class="text-xs" style="margin: 0px;padding: 0px;">Copy</p>
           </button>
         </div>
       <pre class="whitespace-pre-wrap">` +
