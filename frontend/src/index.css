@@ -10,7 +10,7 @@
   --theme-bg-sidebar: #0e0f0f;
   --theme-bg-container: #0e0f0f;
   --theme-bg-chat: #1b1b1e;
-  --theme-bg-chat-input: #27282a;
+  --theme-bg-chat-input: #0d1117;
   --theme-text-primary: #ffffff;
   --theme-text-secondary: rgba(255, 255, 255, 0.6);
   --theme-sidebar-item-default: rgba(255, 255, 255, 0.1);
@@ -59,7 +59,7 @@
   --theme-bg-container: #f9fbfd;
 
   --theme-bg-chat: #ffffff;
-  --theme-bg-chat-input: #eaeaea;
+  --theme-bg-chat-input: #ffffff;
   --theme-text-primary: #0e0f0f;
   --theme-text-secondary: #7a7d7e;
   --theme-sidebar-item-default: #ffffff;
