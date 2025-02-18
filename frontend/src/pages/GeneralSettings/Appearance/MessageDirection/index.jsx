@@ -20,7 +20,6 @@ export function MessageDirection() {
             setMsgDirection("left");
           }}
         />
-        {/* Bottom section */}
         <ItemDirection
           active={msgDirection === "left_right"}
           reverse={false}
