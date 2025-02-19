@@ -15,4 +15,4 @@ if [ ! -f ".env" ]; then
 else
     echo "step2: .env 文件已存在，无需创建。"
 fi
-docker-compose up -d --build
+docker compose up -d --build
