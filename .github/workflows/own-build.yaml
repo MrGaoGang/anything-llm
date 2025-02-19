@@ -41,7 +41,8 @@ jobs:
       # Runs a single command using the runners shell
       - name: Show Dir
         run: ls
-
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
       - name: Build the  Docker image
         run: |
           npm run docker:build
