@@ -17,8 +17,8 @@ if [ "$ENV" = "prod" ]; then
   # 检查当前目录下是否存在 .env 文件
     if [ ! -f ".env" ]; then
         # 如果不存在，则复制 .env.example 为 .env
-        cp .env.dev .env
-        echo ".env.dev to .env created。"
+        cp .env.example .env
+        echo ".env.example to .env created。"
     else
         echo ".env has existed, no need to create."
     fi
@@ -26,8 +26,8 @@ else
   echo "Run Development env..."
   if [ ! -f ".env" ]; then
         # 如果不存在，则复制 .env.example 为 .env
-        cp .env.example .env
-        echo ".env.example to .env created。"
+        cp .env.dev .env
+        echo ".env.dev to .env created。"
     else
         echo ".env has existed, no need to create."
     fi
