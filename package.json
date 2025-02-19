@@ -25,7 +25,11 @@
     "prod:frontend": "cd frontend && yarn build",
     "generate:cloudformation": "node cloud-deployments/aws/cloudformation/generate.mjs",
     "generate::gcp_deployment": "node cloud-deployments/gcp/deployment/generate.mjs",
-    "verify:translations": "cd frontend/src/locales && node verifyTranslations.mjs"
+    "verify:translations": "cd frontend/src/locales && node verifyTranslations.mjs",
+    "docker": "cd docker && docker-compose up -d --build",
+    "docker:stop": "cd docker && docker-compose down",
+    "docker:logs": "cd docker && docker-compose logs -f",
+    "docker:start": "cd docker && sh ./start.sh"
   },
   "private": false
 }
