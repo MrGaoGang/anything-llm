@@ -15,4 +15,15 @@ if [ ! -f ".env" ]; then
 else
     echo "step2: .env 文件已存在，无需创建。"
 fi
-docker compose up -d --build
+
+# 获取第一个参数
+ENV=$1
+
+# 根据参数值执行不同的命令
+if [ "$ENV" = "prod" ]; then
+  echo "运行生产环境..."
+  docker compose up -d --build  -e TAG=latest
+else
+  echo "运行开发环境..."
+  docker compose up -d --build  -e TAG=dev
+fi

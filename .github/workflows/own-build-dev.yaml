@@ -6,7 +6,7 @@ concurrency:
 
 on:
   push:
-    branches: ["feature/own"] # put your current branch to create a build. Core team only.
+    branches: ["feature/own-theme"] # put your current branch to create a build. Core team only.
     paths-ignore:
       - "**.md"
       - "cloud-deployments/*"
@@ -30,7 +30,7 @@ jobs:
           password: ${{ secrets.HUB_GITHUB_TOKEN }}
       - uses: actions/setup-node@v2
         with:
-          node-version: "16.14"
+          node-version: "20.11.1"
       - uses: actions/cache@v2
         id: cache
         with:
@@ -46,4 +46,4 @@ jobs:
       - name: Build the  Docker image
         run: |
           npm run docker:build
-          docker push ghcr.io/mrgaogang/anything-llm:latest
+          docker push ghcr.io/mrgaogang/anything-llm:dev

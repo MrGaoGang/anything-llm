@@ -26,7 +26,8 @@
     "generate:cloudformation": "node cloud-deployments/aws/cloudformation/generate.mjs",
     "generate::gcp_deployment": "node cloud-deployments/gcp/deployment/generate.mjs",
     "verify:translations": "cd frontend/src/locales && node verifyTranslations.mjs",
-    "docker:build": "cd docker && sh ./build.sh",
+    "docker:build-prod": "cd docker && sh ./build.sh prod",
+    "docker:build": "cd docker && sh ./build.sh dev",
     "docker:stop": "cd docker && docker-compose down",
     "docker:logs": "cd docker && docker-compose logs -f",
     "docker:start": "cd docker && sh ./start.sh"
