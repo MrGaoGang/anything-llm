@@ -45,5 +45,5 @@ jobs:
         uses: docker/setup-compose-action@v1
       - name: Build the  Docker image
         run: |
-          npm run docker:build
+          npm run docker:build-prod
           docker push ghcr.io/mrgaogang/anything-llm:latest
