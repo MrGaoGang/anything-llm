@@ -42,7 +42,7 @@ jobs:
       - name: Show Dir
         run: ls
       - name: Set up Docker Compose # setup docker compose env
-        uses: docker/setup-docker-compose-action@v1
+        uses: docker/setup-compose-action@v1
       - name: Build the  Docker image
         run: |
           npm run docker:build
