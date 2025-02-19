@@ -6,7 +6,7 @@ concurrency:
 
 on:
   push:
-    branches: ["feature/own"] # put your current branch to create a build. Core team only.
+    branches: ["feature/own-theme"] # put your current branch to create a build. Core team only.
     paths-ignore:
       - "**.md"
       - "cloud-deployments/*"
