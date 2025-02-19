@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # docker stop eloquent_lichterman
 # docker rm anythingllm
 # docker rm eloquent_lichterman
@@ -12,4 +14,4 @@ docker run -d -p 3001:3001 \
 -v ${STORAGE_LOCATION}:/app/server/storage \
 -v ${STORAGE_LOCATION}/.env:/app/server/.env \
 -e STORAGE_DIR="/app/server/storage" \
-anythingllm-anything-llm:latest
+ghcr.io/mrgaogang/anything-llm:latest
