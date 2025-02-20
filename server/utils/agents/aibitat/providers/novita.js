@@ -57,7 +57,7 @@ class NovitaProvider extends InheritMultiple([Provider, UnTooled]) {
    * @param functions
    * @returns The completion.
    */
-  async complete(messages, functions = []) {
+  async complete(messages, functions = null) {
     let completion;
     if (functions.length > 0) {
       const { toolCall, text } = await this.functionCall(

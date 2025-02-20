@@ -1,0 +1,49 @@
+name: MrGao-Own:AnythingLLM Development Docker image (amd64)
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+on:
+  push:
+    branches: ["feature/own-theme"] # put your current branch to create a build. Core team only.
+    paths-ignore:
+      - "**.md"
+      - "cloud-deployments/*"
+      - "images/**/*"
+      - ".vscode/**/*"
+      - "**/.env.example"
+      - ".github/ISSUE_TEMPLATE/**/*"
+      - "embed/**/*" # Embed should be published to frontend (yarn build:publish) if any changes are introduced
+      - "server/utils/agents/aibitat/example/**/*" # Do not push new image for local dev testing of new aibitat images.
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.HUB_GITHUB_TOKEN }}
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "20.11.1"
+      - uses: actions/cache@v2
+        id: cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+      # Runs a single command using the runners shell
+      - name: Show Dir
+        run: ls
+      - name: Set up Docker Compose # setup docker compose env
+        uses: docker/setup-compose-action@v1
+      - name: Build the  Docker image
+        run: |
+          npm run docker:build
+          docker push ghcr.io/mrgaogang/anything-llm:dev

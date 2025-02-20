@@ -21,6 +21,7 @@ services:
       - "../collector/hotdir/:/app/collector/hotdir"
       - "../collector/outputs/:/app/collector/outputs"
     user: "${UID:-1000}:${GID:-1000}"
+    image: ghcr.io/mrgaogang/anything-llm:${TAG:-latest}
     ports:
       - "3001:3001"
     env_file:
