@@ -116,7 +116,8 @@ RUN echo "Running common build flow of AnythingLLM image for all architectures"
 USER anythingllm
 WORKDIR /app
 
-RUN npm install -g pnpm@9.1.1 --registry=https://registry.npmmirror.com/
+# RUN npm install -g pnpm@9.1.1 --registry=https://registry.npmmirror.com/
+RUN curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=9.1.1 sh -
 
 # Install & Build frontend layer
 FROM build AS frontend-build
