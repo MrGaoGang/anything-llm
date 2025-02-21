@@ -116,10 +116,11 @@ RUN echo "Running common build flow of AnythingLLM image for all architectures"
 USER anythingllm
 WORKDIR /app
 
-RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
-    && apt-get install -y nodejs
+RUN npm install --global pnpm \
+    && SHELL=bash pnpm setup \
+    && source /root/.bashrc
 
-RUN npm install -g pnpm@9.1.1 --registry=https://registry.npmmirror.com/
+# RUN npm install -g pnpm@9.1.1 --registry=https://registry.npmmirror.com/
 # RUN curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=9.1.1 sh -
 
 # Install & Build frontend layer
