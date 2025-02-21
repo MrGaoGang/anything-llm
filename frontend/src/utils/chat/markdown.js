@@ -6,7 +6,7 @@ import "./themes/github-dark.css";
 import "./themes/github.css";
 // import "./themes/atom-one-dark.css";
 // import "./themes/atom-one-light.css";
-import './base.css'
+import "./base.css";
 import { v4 } from "uuid";
 
 const markdown = markdownIt({
