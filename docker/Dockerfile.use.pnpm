@@ -22,7 +22,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
         xdg-utils git build-essential ffmpeg && \
     mkdir -p /etc/apt/keyrings && \
     curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg && \
-    echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_18.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list && \
+    echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list && \
     apt-get update && \
     apt-get install -yq --no-install-recommends nodejs && \
     curl -LO https://github.com/yarnpkg/yarn/releases/download/v1.22.19/yarn_1.22.19_all.deb \
@@ -30,6 +30,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
         && rm yarn_1.22.19_all.deb && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+# 安装 pnpm
+RUN npm install -g pnpm@9.1.1
 
 # Create a group and user with specific UID and GID
 RUN groupadd -g "$ARG_GID" anythingllm && \
@@ -82,7 +84,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
         xdg-utils git build-essential ffmpeg && \
     mkdir -p /etc/apt/keyrings && \
     curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg && \
-    echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_18.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list && \
+    echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list && \
     apt-get update && \
     apt-get install -yq --no-install-recommends nodejs && \
     curl -LO https://github.com/yarnpkg/yarn/releases/download/v1.22.19/yarn_1.22.19_all.deb \
@@ -90,6 +92,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && \
         && rm yarn_1.22.19_all.deb && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+# 安装 pnpm
+RUN npm install -g pnpm@9.1.1
 
 # Create a group and user with specific UID and GID
 RUN groupadd -g "$ARG_GID" anythingllm && \
@@ -116,18 +120,15 @@ RUN echo "Running common build flow of AnythingLLM image for all architectures"
 USER anythingllm
 WORKDIR /app
 
-RUN npm install --global pnpm \
-    && SHELL=bash pnpm setup \
-    && source /root/.bashrc
 
-# RUN npm install -g pnpm@9.1.1 --registry=https://registry.npmmirror.com/
-# RUN curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=9.1.1 sh -
-
+# RUN curl -fsSL https://get.pnpm.io/install.sh | env PNPM_VERSION=9.1.1 bash -
+# RUN node -v \
+#     pnpm -v
 # Install & Build frontend layer
 FROM build AS frontend-build
 COPY --chown=anythingllm:anythingllm ./frontend /app/frontend/
 WORKDIR /app/frontend
-RUN pnpm install --network-timeout 100000 && pnpm cache clean
+RUN pnpm install --fetch-timeout 100000
 RUN pnpm run  build && \
     cp -r dist /tmp/frontend-build && \
     rm -rf * && \
@@ -140,14 +141,14 @@ WORKDIR /app
 FROM build AS backend-build
 COPY ./server /app/server/
 WORKDIR /app/server
-RUN pnpm install --production --network-timeout 100000 && pnpm cache clean
+RUN pnpm install --prod --fetch-timeout 100000 
 WORKDIR /app
 
 # Install collector dependencies
 COPY ./collector/ ./collector/
 WORKDIR /app/collector
 ENV PUPPETEER_DOWNLOAD_BASE_URL=https://storage.googleapis.com/chrome-for-testing-public
-RUN pnpm install --production --network-timeout 100000 && pnpm cache clean
+RUN pnpm install --prod --fetch-timeout 100000 
 
 WORKDIR /app
 USER anythingllm
