@@ -9,7 +9,7 @@ services:
     container_name: anythingllm
     build:
       context: ../.
-      dockerfile: ./docker/Dockerfile
+      dockerfile: ./docker/Dockerfile.use.pnpm
       args:
         ARG_UID: ${UID:-1000}
         ARG_GID: ${GID:-1000}

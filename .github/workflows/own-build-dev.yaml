@@ -46,4 +46,7 @@ jobs:
       - name: Build the  Docker image
         run: |
           npm run docker:build
+          
+      - name: Publish the  Docker image
+        run: |
           docker push ghcr.io/mrgaogang/anything-llm:dev
