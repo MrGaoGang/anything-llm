@@ -10,6 +10,7 @@ import DOMPurify from "@/utils/chat/purify";
 import { EditMessageForm, useEditMessage } from "./Actions/EditMessage";
 import { useWatchDeleteMessage } from "./Actions/DeleteMessage";
 import TTSMessage from "./Actions/TTSButton";
+import './index.scss';
 import {
   THOUGHT_REGEX_CLOSE,
   THOUGHT_REGEX_COMPLETE,
@@ -194,7 +195,7 @@ const RenderChatContent = memo(
     if (role !== "assistant")
       return (
         <span
-          className="flex flex-col gap-y-1"
+          className="flex flex-col gap-y-1 use-item-message "
           dangerouslySetInnerHTML={{
             __html: DOMPurify.sanitize(renderMarkdown(message)),
           }}
@@ -229,7 +230,7 @@ const RenderChatContent = memo(
           <ThoughtChainComponent content={thoughtChain} expanded={expanded} />
         )}
         <span
-          className="flex flex-col gap-y-1"
+          className="flex flex-col gap-y-1 robot-item-message"
           dangerouslySetInnerHTML={{
             __html: DOMPurify.sanitize(renderMarkdown(msgToRender)),
           }}

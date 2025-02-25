@@ -25,7 +25,15 @@ export default defineConfig({
     "process.env": process.env
   },
   css: {
-    postcss
+    postcss,
+    preprocessorOptions: {
+      scss: {
+        api: 'modern-compiler', // or "modern", "legacy"
+        importers: [
+          // ...
+        ],
+      },
+    },
   },
   plugins: [
     react(),

@@ -11,7 +11,7 @@
   },
   "scripts": {
     "lint": "cd server && pnpm lint && cd ../frontend && pnpm run lint && cd ../collector && pnpm run lint",
-    "setup": "cd server && pnpm i && cd ../collector && pnpm i && cd ../frontend && pnpm i && cd .. && pnpm setup:envs && pnpm run prisma:setup && echo \"Please run pnpm run dev:server, pnpm  run dev:collector, and pnpm run dev:frontend in separate terminal tabs.\"",
+    "setup": "cd server && pnpm i && cd ../collector && pnpm i && cd ../frontend && pnpm i && cd .. && pnpm run setup:envs && pnpm run prisma:setup && echo \"Please run pnpm run dev:server, pnpm  run dev:collector, and pnpm run dev:frontend in separate terminal tabs.\"",
     "setup:envs": "cp -n ./frontend/.env.example ./frontend/.env && cp -n ./server/.env.example ./server/.env.development && cp -n ./collector/.env.example ./collector/.env && cp -n ./docker/.env.example ./docker/.env && echo \"All ENV files copied!\n\"",
     "dev:server": "cd server && pnpm dev",
     "dev:collector": "cd collector && pnpm dev",

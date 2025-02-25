@@ -1,4 +1,6 @@
-import { encode as HTMLEncode } from "he";
+import {
+  encode as HTMLEncode
+} from "he";
 import markdownIt from "markdown-it";
 import markdownItKatexPlugin from "./plugins/markdown-katex";
 import hljs from "highlight.js";
@@ -6,19 +8,27 @@ import "./themes/github-dark.css";
 import "./themes/github.css";
 // import "./themes/atom-one-dark.css";
 // import "./themes/atom-one-light.css";
-import "./base.css";
-import { v4 } from "uuid";
+import "./base.scss";
+import {
+  v4
+} from "uuid";
+
+function highlightBlock(str, lang) {
+  return `<pre class="code-block-wrapper"><div class="code-block-header"><span class="code-block-header__lang">${lang}</span><span class="code-block-header__copy">Copy</span></div><code class="hljs code-block-body ${lang}">${str}</code></pre>`
+}
+
 
 const markdown = markdownIt({
   html: false,
   typographer: true,
   highlight: function (code, lang) {
     const uuid = v4();
-    const theme =
-      window.localStorage.getItem("theme") === "light"
-        ? "github"
-        : "github-dark";
+    // const theme =
+    //   window.localStorage.getItem("theme") === "light" ?
+    //   "github" :
+    //   "github-dark";
 
+    const theme = "github-dark";
     if (lang && hljs.getLanguage(lang)) {
       try {
         return (
@@ -33,7 +43,10 @@ const markdown = markdownIt({
               </button>
             </div>
           <pre class="whitespace-pre-wrap">` +
-          hljs.highlight(code, { language: lang, ignoreIllegals: true }).value +
+          hljs.highlight(code, {
+            language: lang,
+            ignoreIllegals: true
+          }).value +
           "</pre></div>"
         );
       } catch (__) {}
