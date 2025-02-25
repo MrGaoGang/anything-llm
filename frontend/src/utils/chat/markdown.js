@@ -13,10 +13,6 @@ import {
   v4
 } from "uuid";
 
-function highlightBlock(str, lang) {
-  return `<pre class="code-block-wrapper"><div class="code-block-header"><span class="code-block-header__lang">${lang}</span><span class="code-block-header__copy">Copy</span></div><code class="hljs code-block-body ${lang}">${str}</code></pre>`
-}
-
 
 const markdown = markdownIt({
   html: false,
