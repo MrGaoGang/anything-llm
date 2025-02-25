@@ -98,6 +98,9 @@ importers:
       recharts-to-png:
         specifier: ^2.3.1
         version: 2.4.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(recharts@2.15.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
+      regenerator-runtime:
+        specifier: ^0.14.1
+        version: 0.14.1
       text-case:
         specifier: ^1.0.9
         version: 1.0.9
