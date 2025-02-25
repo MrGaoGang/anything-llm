@@ -4,10 +4,10 @@ import {
 import markdownIt from "markdown-it";
 import markdownItKatexPlugin from "./plugins/markdown-katex";
 import hljs from "highlight.js";
-import "./themes/github-dark.css";
-import "./themes/github.css";
-// import "./themes/atom-one-dark.css";
-// import "./themes/atom-one-light.css";
+// import "./themes/github-dark.css";
+// import "./themes/github.css";
+import "./themes/atom-one-dark.css";
+import "./themes/atom-one-light.css";
 import "./base.scss";
 import {
   v4
@@ -24,7 +24,7 @@ const markdown = markdownIt({
     //   "github" :
     //   "github-dark";
 
-    const theme = "github-dark";
+    const theme = "atom-one-dark";
     if (lang && hljs.getLanguage(lang)) {
       try {
         return (

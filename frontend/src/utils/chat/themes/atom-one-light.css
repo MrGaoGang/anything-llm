@@ -18,77 +18,77 @@ hue-6-2: #c18401
 
 */
 
-.hljs {
+.atom-one.hljs {
   color: #383a42;
   background: #fafafa;
 }
 
-.hljs-comment,
-.hljs-quote {
+.atom-one .hljs-comment,
+.atom-one .hljs-quote {
   color: #a0a1a7;
   font-style: italic;
 }
 
-.hljs-doctag,
-.hljs-keyword,
-.hljs-formula {
+.atom-one .hljs-doctag,
+.atom-one .hljs-keyword,
+.atom-one .hljs-formula {
   color: #a626a4;
 }
 
-.hljs-section,
-.hljs-name,
-.hljs-selector-tag,
-.hljs-deletion,
-.hljs-subst {
+.atom-one .hljs-section,
+.atom-one .hljs-name,
+.atom-one .hljs-selector-tag,
+.atom-one .hljs-deletion,
+.atom-one .hljs-subst {
   color: #e45649;
 }
 
-.hljs-literal {
+.atom-one .hljs-literal {
   color: #0184bb;
 }
 
-.hljs-string,
-.hljs-regexp,
-.hljs-addition,
-.hljs-attribute,
-.hljs-meta .hljs-string {
+.atom-one .hljs-string,
+.atom-one .hljs-regexp,
+.atom-one .hljs-addition,
+.atom-one .hljs-attribute,
+.atom-one .hljs-meta .atom-one .hljs-string {
   color: #50a14f;
 }
 
-.hljs-attr,
-.hljs-variable,
-.hljs-template-variable,
-.hljs-type,
-.hljs-selector-class,
-.hljs-selector-attr,
-.hljs-selector-pseudo,
-.hljs-number {
+.atom-one .hljs-attr,
+.atom-one .hljs-variable,
+.atom-one .hljs-template-variable,
+.atom-one .hljs-type,
+.atom-one .hljs-selector-class,
+.atom-one .hljs-selector-attr,
+.atom-one .hljs-selector-pseudo,
+.atom-one .hljs-number {
   color: #986801;
 }
 
-.hljs-symbol,
-.hljs-bullet,
-.hljs-link,
-.hljs-meta,
-.hljs-selector-id,
-.hljs-title {
+.atom-one .hljs-symbol,
+.atom-one .hljs-bullet,
+.atom-one .hljs-link,
+.atom-one .hljs-meta,
+.atom-one .hljs-selector-id,
+.atom-one .hljs-title {
   color: #4078f2;
 }
 
-.hljs-built_in,
-.hljs-title.class_,
-.hljs-class .hljs-title {
+.atom-one .hljs-built_in,
+.atom-one .hljs-title.class_,
+.atom-one .hljs-class .atom-one .hljs-title {
   color: #c18401;
 }
 
-.hljs-emphasis {
+.atom-one .hljs-emphasis {
   font-style: italic;
 }
 
-.hljs-strong {
+.atom-one .hljs-strong {
   font-weight: bold;
 }
 
-.hljs-link {
+.atom-one .hljs-link {
   text-decoration: underline;
 }
