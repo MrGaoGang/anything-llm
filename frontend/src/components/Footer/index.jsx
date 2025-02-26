@@ -2,12 +2,12 @@ import System from "@/models/system";
 import paths from "@/utils/paths";
 import {
   BookOpen,
-  DiscordLogo,
   GithubLogo,
   Briefcase,
   Envelope,
   Globe,
   HouseLine,
+  WechatLogo,
   Info,
   LinkSimple,
 } from "@phosphor-icons/react";
@@ -20,7 +20,7 @@ import { Link } from "react-router-dom";
 export const MAX_ICONS = 3;
 export const ICON_COMPONENTS = {
   BookOpen: BookOpen,
-  DiscordLogo: DiscordLogo,
+  WechatLogo: WechatLogo,
   GithubLogo: GithubLogo,
   Envelope: Envelope,
   LinkSimple: LinkSimple,
@@ -49,7 +49,7 @@ export default function Footer() {
     return (
       <div className="flex justify-center mb-2">
         <div className="flex space-x-4">
-          <div className="flex w-fit">
+          {/* <div className="flex w-fit">
             <Link
               to={paths.github()}
               target="_blank"
@@ -65,8 +65,8 @@ export default function Footer() {
                 color="var(--theme-sidebar-footer-icon-fill)"
               />
             </Link>
-          </div>
-          <div className="flex w-fit">
+          </div> */}
+          {/* <div className="flex w-fit">
             <Link
               to={paths.docs()}
               target="_blank"
@@ -82,21 +82,21 @@ export default function Footer() {
                 color="var(--theme-sidebar-footer-icon-fill)"
               />
             </Link>
-          </div>
+          </div> */}
           <div className="flex w-fit">
             <Link
-              to={paths.discord()}
-              target="_blank"
-              rel="noreferrer"
+              // to={paths.discord()}
+              // target="_blank"
+              // rel="noreferrer"
               className="transition-all duration-300 p-2 rounded-full bg-theme-sidebar-footer-icon hover:bg-theme-sidebar-footer-icon-hover"
-              aria-label="Join our Discord server"
+              aria-label="添加客服微信: G426G426"
               data-tooltip-id="footer-item"
-              data-tooltip-content="Join the AnythingLLM Discord"
+              data-tooltip-content="添加客服微信: G426G426"
             >
-              <DiscordLogo
+              <WechatLogo
                 weight="fill"
                 className="h-5 w-5"
-                color="var(--theme-sidebar-footer-icon-fill)"
+                color="#1AAD19"
               />
             </Link>
           </div>

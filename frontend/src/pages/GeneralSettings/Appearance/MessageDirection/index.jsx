@@ -7,16 +7,16 @@ export function MessageDirection() {
   return (
     <div className="flex flex-col gap-y-1 mt-4">
       <h2 className="text-base leading-6 font-bold text-white">
-        Message Chat Alignment
+      会话显示模式
       </h2>
       <p className="text-xs leading-[18px] font-base text-white/60">
-        Select the message alignment mode when using the chat interface.
+       点击下方选择聊天消息对话显示方式
       </p>
       <div className="flex flex-row flex-wrap gap-x-4 pt-1">
         <ItemDirection
           active={msgDirection === "left"}
           reverse={false}
-          msg="User and AI messages are aligned to the left (default)"
+          msg="会话气泡，靠左对齐"
           onSelect={() => {
             setMsgDirection("left");
           }}
@@ -24,7 +24,7 @@ export function MessageDirection() {
         <ItemDirection
           active={msgDirection === "left_right"}
           reverse={true}
-          msg="User and AI messages are distributed left and right alternating each message"
+          msg="会话气泡，靠右对齐"
           onSelect={() => {
             setMsgDirection("left_right");
           }}

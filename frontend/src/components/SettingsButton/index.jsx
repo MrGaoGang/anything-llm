@@ -35,9 +35,9 @@ export default function SettingsButton() {
         to={paths.settings.appearance()}
         className="transition-all duration-300 p-2 rounded-full bg-theme-sidebar-footer-icon hover:bg-theme-sidebar-footer-icon-hover"
         // className="transition-all duration-300 p-2 rounded-full  bg-sidebar-button hover:bg-menu-item-selected-gradient hover:border-slate-100 hover:border-opacity-50 border-transparent border"
-        aria-label="Settings"
+        aria-label="设置"
         data-tooltip-id="footer-item"
-        data-tooltip-content="Open settings"
+        data-tooltip-content="打开设置页面"
       >
         <Wrench
           className="h-5 w-5"
