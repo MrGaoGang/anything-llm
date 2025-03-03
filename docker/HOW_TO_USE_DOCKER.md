@@ -38,6 +38,8 @@ Use the Dockerized version of AnythingLLM for a much faster and complete startup
 Pull in the latest image from docker. Supports both `amd64` and `arm64` CPU architectures.
 
 ```shell
+docker login -u mrgaogang -p your_token https://ghcr.io
+docker image prune --force
 docker pull ghcr.io/mrgaogang/anything-llm:dev
 ```
 
