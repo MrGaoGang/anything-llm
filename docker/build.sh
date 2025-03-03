@@ -11,6 +11,27 @@ fi
 # 获取第一个参数
 ENV=$1
 
+# 定义函数：创建或检查 .env.production 文件
+create_or_check_env_file() {
+  local file_path="$1"  # 文件路径作为参数传入
+  local content="$2"    # 文件内容作为参数传入
+
+  # 检查文件是否存在
+  if [ ! -f "$file_path" ]; then
+    # 文件不存在，创建文件并写入内容
+    echo "$content" > "$file_path"
+    echo "前端环境配置文件已创建并写入内容: $file_path"
+  else
+    # 文件已存在
+    echo "前端环境配置文件已存在: $file_path"
+  fi
+}
+
+# 调用函数
+FILE_PATH="../frontend/.env.production"
+CONTENT="VITE_API_BASE='http://3.26.43.5:3001/api'"
+
+
 # 根据参数值执行不同的命令
 if [ "$ENV" = "prod" ]; then
   echo "Run Pro env ..."
@@ -19,6 +40,7 @@ if [ "$ENV" = "prod" ]; then
         # 如果不存在，则复制 .env.example 为 .env
         cp .env.example .env
         echo ".env.example to .env created。"
+        create_or_check_env_file "$FILE_PATH" "$CONTENT"
     else
         echo ".env has existed, no need to create."
     fi
