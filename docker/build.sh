@@ -40,10 +40,10 @@ if [ "$ENV" = "prod" ]; then
         # 如果不存在，则复制 .env.example 为 .env
         cp .env.example .env
         echo ".env.example to .env created。"
-        create_or_check_env_file "$FILE_PATH" "$CONTENT"
     else
         echo ".env has existed, no need to create."
     fi
+    create_or_check_env_file "$FILE_PATH" "$CONTENT"
 else
   echo "Run Development env..."
   if [ ! -f ".env" ]; then
