@@ -285,6 +285,7 @@ export default function ChatContainer({ workspace, knownHistory = [] }) {
           isStreaming={loadingResponse}
           sendCommand={sendCommand}
           attachments={files}
+          isEmptyChat={chatHistory.length === 0}
         />
       </DnDFileUploaderWrapper>
       <ChatTooltips />

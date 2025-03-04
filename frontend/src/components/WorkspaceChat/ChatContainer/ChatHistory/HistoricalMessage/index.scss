@@ -2,10 +2,18 @@
   background-color: #eff6ff;
   border-radius: 8px;
   padding: 5px 10px;
+  color: #000;
 }
 
 .robot-item-message{
-  background-color:white;
   border-radius: 14px;
   padding: 5px 10px;
+}
+.light{
+  .use-item-message{
+    color: #fff;
+  }
+  .robot-item-message{
+
+  }
 }

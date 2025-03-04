@@ -1,0 +1,32 @@
+.empty-chat-container{
+  margin-top: -50%;
+}
+.empty-chat-title {
+  align-items: center;
+  gap: 14px;
+  margin-top: auto;
+  font-size: 24px;
+  font-weight: 500;
+  display: flex;
+  color: #fff;
+  text-align: center;
+  width: 100%;
+  display: block;
+}
+
+.empty-chat-desc {
+  color: #fff;
+  margin: 8px 0 20px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.light {
+  .empty-chat-title {
+    color: #000;
+  }
+
+  .empty-chat-desc {
+    color: #404040;
+  }
+}

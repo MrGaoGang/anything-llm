@@ -15,6 +15,7 @@ import Appearance from "@/models/appearance";
 import useTextSize from "@/hooks/useTextSize";
 import { v4 } from "uuid";
 import { useChatMessageAlignment } from "@/hooks/useChatMessageAlignment";
+import './index.scss';
 
 export default function ChatHistory({
   history = [],
@@ -179,26 +180,26 @@ export default function ChatHistory({
 
   if (history.length === 0 && !hasAttachments) {
     return (
-      <div className="flex flex-col h-full md:mt-0 pb-44 md:pb-40 w-full justify-end items-center">
+      <div className="flex flex-col h-full md:mt-0 pb-44 md:pb-40 w-full justify-end items-center empty-chat-container">
         <div className="flex flex-col items-center md:items-start md:max-w-[600px] w-full px-4">
-          <p className="text-white/60 text-lg font-base py-4">
-            欢迎来到当前会话空间
-          </p>
+          <div className="text-lg font-base py-4 empty-chat-title">
+           我是智能助手 metaatem ，很高兴见到你！
+          </div>
           {!user || user.role !== "default" ? (
-            <p className="w-full items-center text-white/60 text-lg font-base flex flex-col md:flex-row gap-x-1">
-              开始{" "}
+            <span className="w-full  empty-chat-desc">
+             我可以作为你的智能客服，也可以帮你写代码、读文件、
               <span
-                className="underline font-medium cursor-pointer"
+                className="underline font-medium cursor-pointer  empty-chat-desc__upload"
                 onClick={showModal}
               >
                 上传文件
               </span>
-              或者 <b className="font-medium italic">开始聊天</b>
-            </p>
+              、写作等各种创意内容，请把你的任务交给我吧~
+            </span>
           ) : (
-            <p className="w-full items-center text-white/60 text-lg font-base flex flex-col md:flex-row gap-x-1">
-              开始 <b className="font-medium italic">聊天吧</b>
-            </p>
+            <span className="w-full  empty-chat-desc">
+            我可以作为你的智能客服，也可以帮你写代码、写作等各种创意内容，请把你的任务交给我吧~
+           </span>
           )}
           <WorkspaceChatSuggestions
             suggestions={workspace?.suggestedMessages ?? []}

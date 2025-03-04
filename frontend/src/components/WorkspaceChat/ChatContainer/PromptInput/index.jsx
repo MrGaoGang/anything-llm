@@ -17,6 +17,8 @@ import AttachmentManager from "./Attachments";
 import AttachItem from "./AttachItem";
 import { PASTE_ATTACHMENT_EVENT } from "../DnDWrapper";
 import useTextSize from "@/hooks/useTextSize";
+import './index.scss';
+import classNames from "classnames";
 
 export const PROMPT_INPUT_EVENT = "set_prompt_input";
 const MAX_EDIT_STACK_SIZE = 100;
@@ -27,6 +29,7 @@ export default function PromptInput({
   isStreaming,
   sendCommand,
   attachments = [],
+  isEmptyChat = false,
 }) {
   const [promptInput, setPromptInput] = useState("");
   const { showAgents, setShowAgents } = useAvailableAgents();
@@ -230,7 +233,9 @@ export default function PromptInput({
   }
 
   return (
-    <div className="w-full fixed md:absolute bottom-0 left-0 z-10 md:z-0 flex justify-center items-center">
+    <div className={classNames('w-full fixed md:absolute bottom-0 left-0 z-10 md:z-0 flex justify-center items-center', {
+      'empty-chat-input': isEmptyChat,
+    })}>
       <SlashCommands
         showing={showSlashCommand}
         setShowing={setShowSlashCommand}
@@ -247,7 +252,7 @@ export default function PromptInput({
         className="flex flex-col gap-y-1 rounded-t-lg md:w-3/4 w-full mx-auto max-w-xl items-center"
       >
         <div className="flex items-center rounded-lg md:mb-4">
-          <div className="w-[95vw] md:w-[635px] bg-theme-bg-chat-input light:bg-white light:border-solid light:border-[1px] light:border-theme-chat-input-border shadow-sm rounded-2xl flex flex-col px-4 overflow-hidden">
+          <div className="w-[95vw] md:w-[635px] bg-theme-bg-chat-input light:bg-white light:border-solid light:border-[1px] light:border-theme-chat-input-border shadow-sm rounded-2xl flex flex-col px-4 overflow-hidden  chat-input">
             <AttachmentManager attachments={attachments} />
             <div className="flex items-center w-full border-b-2 border-theme-chat-input-border">
               <textarea
@@ -265,8 +270,8 @@ export default function PromptInput({
                   adjustTextArea(e);
                 }}
                 value={promptInput}
-                className={`border-none cursor-text max-h-[50vh] md:max-h-[350px] md:min-h-[40px] mx-2 md:mx-0 pt-[12px] w-full leading-5 md:text-md text-white bg-transparent placeholder:text-white/60 light:placeholder:text-theme-text-primary resize-none active:outline-none focus:outline-none flex-grow ${textSizeClass}`}
-                placeholder={"Send a message"}
+                className={`border-none cursor-text max-h-[50vh] md:max-h-[350px] md:min-h-[40px] mx-2 md:mx-0 pt-[12px] w-full leading-5 md:text-md text-white bg-transparent placeholder:text-white/60 light:placeholder:text-theme-text-primary resize-none active:outline-none focus:outline-none flex-grow ${textSizeClass}  chat-input-area`}
+                placeholder={"给智能助手发送消息"}
               />
               {isStreaming ? (
                 <StopGenerationButton />
