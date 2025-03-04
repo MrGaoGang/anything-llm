@@ -1,9 +1,5 @@
-const {
-  v4
-} = require("uuid");
-const {
-  SystemSettings
-} = require("./systemSettings");
+const { v4 } = require("uuid");
+const { SystemSettings } = require("./systemSettings");
 
 const Telemetry = {
   // Write-only key. It can't read events or any of your other data, so it's safe to use in public apps.
@@ -13,9 +9,9 @@ const Telemetry = {
 
   id: async function () {
     const result = await SystemSettings.get({
-      label: this.label
+      label: this.label,
     });
-    return result ? .value || null;
+    return result?.value || null;
   },
 
   connect: async function () {
@@ -23,23 +19,19 @@ const Telemetry = {
     const distinctId = await this.findOrCreateId();
     return {
       client,
-      distinctId
+      distinctId,
     };
   },
 
   isDev: function () {
-    return process.env.NODE_ENV === "development" && this
-      .stubDevelopmentEvents;
+    return process.env.NODE_ENV === "development" && this.stubDevelopmentEvents;
   },
 
   client: function () {
-    if (process.env.DISABLE_TELEMETRY === "true" || this.isDev())
-    return null;
-    const {
-      PostHog
-    } = require("posthog-node");
+    if (process.env.DISABLE_TELEMETRY === "true" || this.isDev()) return null;
+    const { PostHog } = require("posthog-node");
     return new PostHog(this.pubkey, {
-      host: 'https://us.i.posthog.com'
+      host: "https://us.i.posthog.com",
     });
   },
 
@@ -56,16 +48,12 @@ const Telemetry = {
     silent = false
   ) {
     try {
-      const {
-        client,
-        distinctId: systemId
-      } = await this.connect();
+      const { client, distinctId: systemId } = await this.connect();
       if (!client) return;
-      const distinctId = !!subUserId ? `${systemId}::${subUserId}` :
-        systemId;
+      const distinctId = !!subUserId ? `${systemId}::${subUserId}` : systemId;
       const properties = {
         ...eventProperties,
-        runtime: this.runtime()
+        runtime: this.runtime(),
       };
 
       // Silence some events to keep logs from being too messy in production
@@ -97,7 +85,7 @@ const Telemetry = {
   setUid: async function () {
     const newId = v4();
     await SystemSettings._updateSettings({
-      [this.label]: newId
+      [this.label]: newId,
     });
     return newId;
   },
@@ -112,5 +100,5 @@ const Telemetry = {
 };
 
 module.exports = {
-  Telemetry
+  Telemetry,
 };

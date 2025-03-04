@@ -87,7 +87,7 @@ const Citation = memo(({ source, onClick }) => {
 
   return (
     <div
-      className="w-fit flex flex-row justify-center items-center cursor-pointer text-sky-400"
+      className="w-fit flex flex-row justify-center items-center cursor-pointer text-[var(--primary-color)]"
       onClick={onClick}
     >
       <CitationIcon className="w-6 h-6" weight="bold" />

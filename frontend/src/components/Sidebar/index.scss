@@ -1,21 +1,22 @@
 .light {
-  // .add-new-workspace {
-  //   border: 1px solid #19be6b;
-  //   color: #19be6b;
+  .add-new-workspace {
+    border: 1px solid transparent;
+    color: white;
+    background-color:  var(--primary-hover-color);
 
-  //   &__label {
-  //     color: #19be6b;
+    &__label {
+      color: white;
 
-  //   }
+    }
 
-  //   &:hover {
-  //     background-color: #19be6b;
-  //     color: #fff;
+    &:hover {
+      background-color: var(--primary-color);
+      color: #fff;
 
-  //     .add-new-workspace__label {
-  //       color: #fff;
+      .add-new-workspace__label {
+        color: #fff;
 
-  //     }
-  //   }
-  // }
+      }
+    }
+  }
 }
