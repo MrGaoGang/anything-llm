@@ -16,6 +16,7 @@ import useTextSize from "@/hooks/useTextSize";
 import { v4 } from "uuid";
 import { useChatMessageAlignment } from "@/hooks/useChatMessageAlignment";
 import './index.scss';
+import { useAppName } from "@/hooks/useAppName";
 
 export default function ChatHistory({
   history = [],
@@ -141,6 +142,8 @@ export default function ChatHistory({
     );
   };
 
+  const appName = useAppName()
+
   const compiledHistory = useMemo(
     () =>
       buildMessages({
@@ -183,7 +186,7 @@ export default function ChatHistory({
       <div className="flex flex-col h-full md:mt-0 pb-44 md:pb-40 w-full justify-end items-center empty-chat-container">
         <div className="flex flex-col items-center md:items-start md:max-w-[600px] w-full px-4">
           <div className="text-lg font-base py-4 empty-chat-title">
-           我是智能助手 metaatem ，很高兴见到你！
+           我是智能助手 {appName} ，很高兴见到你！
           </div>
           {!user || user.role !== "default" ? (
             <span className="w-full  empty-chat-desc">
