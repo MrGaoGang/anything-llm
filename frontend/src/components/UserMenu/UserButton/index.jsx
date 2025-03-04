@@ -7,6 +7,7 @@ import { userFromStorage } from "@/utils/request";
 import { Person } from "@phosphor-icons/react";
 import { useEffect, useRef, useState } from "react";
 import AccountModal from "../AccountModal";
+import './index.scss';
 import { AUTH_TIMESTAMP, AUTH_TOKEN, AUTH_USER } from "@/utils/constants";
 
 export default function UserButton() {
@@ -69,7 +70,7 @@ export default function UserButton() {
           ref={menuRef}
           className="w-fit rounded-lg absolute top-12 right-0 bg-theme-action-menu-bg p-2 flex items-center-justify-center"
         >
-          <div className="flex flex-col gap-y-2">
+          <div className="flex flex-col gap-y-2 user-menu-list">
             {mode === "multi" && !!user && (
               <button
                 onClick={handleOpenAccountModal}
