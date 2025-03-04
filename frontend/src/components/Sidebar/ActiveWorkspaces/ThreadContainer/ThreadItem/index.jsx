@@ -196,7 +196,7 @@ function OptionsMenu({
 
   const renameThread = async () => {
     const name = window
-      .prompt("What would you like to rename this thread to?")
+      .prompt("请输入自定义会话名称?")
       ?.trim();
     if (!name || name.length === 0) {
       close();
