@@ -6,6 +6,7 @@ import paths from "@/utils/paths";
 import ModalWrapper from "../ModalWrapper";
 import { useParams } from "react-router-dom";
 import { DnDFileUploaderProvider } from "./ChatContainer/DnDWrapper";
+import { copyToClip } from "@/utils/copy";
 
 export default function WorkspaceChat({ loading, workspace }) {
   const { threadSlug = null } = useParams();
@@ -81,8 +82,9 @@ function copyCodeSnippet(uuid) {
       "pre:first-of-type"
     )?.innerText;
   if (!markdown) return false;
-
-  window.navigator.clipboard.writeText(markdown);
+  // window.navigator.clipboard.writeText(markdown);
+  copyToClip(markdown);
+  console.log('Copied to clipboard!');
   target.classList.add("text-green-500");
   const originalText = target.innerHTML;
   target.innerText = "Copied!";

@@ -4,6 +4,7 @@ import showToast from "@/utils/toast";
 import hljs from "highlight.js";
 import "@/utils/chat/themes/github-dark.css";
 import "@/utils/chat/themes/github.css";
+import { copyToClip } from "@/utils/copy";
 
 export default function CodeSnippetModal({ embed, closeModal }) {
   return (
@@ -71,7 +72,7 @@ const ScriptTag = ({ embed }) => {
     window.localStorage.getItem("theme") === "light" ? "github" : "github-dark";
 
   const handleClick = () => {
-    window.navigator.clipboard.writeText(snippet);
+    copyToClip(snippet);
     setCopied(true);
     setTimeout(() => {
       setCopied(false);

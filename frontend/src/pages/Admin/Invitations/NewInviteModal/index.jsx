@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { X } from "@phosphor-icons/react";
 import Admin from "@/models/admin";
 import Workspace from "@/models/workspace";
+import { copyToClip } from "@/utils/copy";
 
 export default function NewInviteModal({ closeModal }) {
   const [invite, setInvite] = useState(null);
@@ -23,7 +24,7 @@ export default function NewInviteModal({ closeModal }) {
   };
   const copyInviteLink = () => {
     if (!invite) return false;
-    window.navigator.clipboard.writeText(
+    copyToClip(
       `${window.location.origin}/accept-invite/${invite.code}`
     );
     setCopied(true);

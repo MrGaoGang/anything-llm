@@ -4,6 +4,7 @@ import Admin from "@/models/admin";
 import paths from "@/utils/paths";
 import { userFromStorage } from "@/utils/request";
 import System from "@/models/system";
+import { copyToClip } from "@/utils/copy";
 
 export default function NewApiKeyModal({ closeModal }) {
   const [apiKey, setApiKey] = useState(null);
@@ -22,7 +23,7 @@ export default function NewApiKeyModal({ closeModal }) {
   };
   const copyApiKey = () => {
     if (!apiKey) return false;
-    window.navigator.clipboard.writeText(apiKey.secret);
+    copyToClip(apiKey.secret);
     setCopied(true);
   };
   useEffect(() => {

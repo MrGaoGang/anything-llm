@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { titleCase } from "text-case";
 import Admin from "@/models/admin";
 import { Trash } from "@phosphor-icons/react";
+import { copyToClip } from "@/utils/copy";
 
 export default function InviteRow({ invite }) {
   const rowRef = useRef(null);
@@ -22,7 +23,7 @@ export default function InviteRow({ invite }) {
   };
   const copyInviteLink = () => {
     if (!invite) return false;
-    window.navigator.clipboard.writeText(
+    copyToClip(
       `${window.location.origin}/accept-invite/${invite.code}`
     );
     setCopied(true);

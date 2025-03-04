@@ -4,6 +4,7 @@ import showToast from "@/utils/toast";
 import { Trash } from "@phosphor-icons/react";
 import { userFromStorage } from "@/utils/request";
 import System from "@/models/system";
+import { copyToClip } from "@/utils/copy";
 
 export default function ApiKeyRow({ apiKey }) {
   const rowRef = useRef(null);
@@ -27,7 +28,7 @@ export default function ApiKeyRow({ apiKey }) {
 
   const copyApiKey = () => {
     if (!apiKey) return false;
-    window.navigator.clipboard.writeText(apiKey.secret);
+    copyToClip(apiKey.secret);
     showToast("API Key copied to clipboard", "success");
     setCopied(true);
   };
