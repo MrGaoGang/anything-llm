@@ -3,7 +3,7 @@ const slugifyModule = require("slugify");
 const { v4: uuidv4 } = require("uuid");
 
 const WorkspaceThread = {
-  defaultName: "Thread",
+  defaultName: "新记录",
   writable: ["name"],
 
   /**
