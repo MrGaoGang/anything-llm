@@ -29,7 +29,7 @@ create_or_check_env_file() {
 
 # 调用函数
 FILE_PATH="../frontend/.env.production"
-CONTENT="VITE_API_BASE='http://3.26.43.5:3001/api'"
+CONTENT="VITE_API_BASE='http://chat-api.metaatem.cn:3001/api'"
 
 
 # 根据参数值执行不同的命令
