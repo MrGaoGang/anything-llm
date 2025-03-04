@@ -1,5 +1,9 @@
-const { v4 } = require("uuid");
-const { SystemSettings } = require("./systemSettings");
+const {
+  v4
+} = require("uuid");
+const {
+  SystemSettings
+} = require("./systemSettings");
 
 const Telemetry = {
   // Write-only key. It can't read events or any of your other data, so it's safe to use in public apps.
@@ -8,24 +12,35 @@ const Telemetry = {
   label: "telemetry_id",
 
   id: async function () {
-    const result = await SystemSettings.get({ label: this.label });
-    return result?.value || null;
+    const result = await SystemSettings.get({
+      label: this.label
+    });
+    return result ? .value || null;
   },
 
   connect: async function () {
     const client = this.client();
     const distinctId = await this.findOrCreateId();
-    return { client, distinctId };
+    return {
+      client,
+      distinctId
+    };
   },
 
   isDev: function () {
-    return process.env.NODE_ENV === "development" && this.stubDevelopmentEvents;
+    return process.env.NODE_ENV === "development" && this
+      .stubDevelopmentEvents;
   },
 
   client: function () {
-    if (process.env.DISABLE_TELEMETRY === "true" || this.isDev()) return null;
-    const { PostHog } = require("posthog-node");
-    return new PostHog(this.pubkey);
+    if (process.env.DISABLE_TELEMETRY === "true" || this.isDev())
+    return null;
+    const {
+      PostHog
+    } = require("posthog-node");
+    return new PostHog(this.pubkey, {
+      host: 'https://us.i.posthog.com'
+    });
   },
 
   runtime: function () {
@@ -41,10 +56,17 @@ const Telemetry = {
     silent = false
   ) {
     try {
-      const { client, distinctId: systemId } = await this.connect();
+      const {
+        client,
+        distinctId: systemId
+      } = await this.connect();
       if (!client) return;
-      const distinctId = !!subUserId ? `${systemId}::${subUserId}` : systemId;
-      const properties = { ...eventProperties, runtime: this.runtime() };
+      const distinctId = !!subUserId ? `${systemId}::${subUserId}` :
+        systemId;
+      const properties = {
+        ...eventProperties,
+        runtime: this.runtime()
+      };
 
       // Silence some events to keep logs from being too messy in production
       // eg: Tool calls from agents spamming the logs.
@@ -74,7 +96,9 @@ const Telemetry = {
 
   setUid: async function () {
     const newId = v4();
-    await SystemSettings._updateSettings({ [this.label]: newId });
+    await SystemSettings._updateSettings({
+      [this.label]: newId
+    });
     return newId;
   },
 
@@ -87,4 +111,6 @@ const Telemetry = {
   },
 };
 
-module.exports = { Telemetry };
+module.exports = {
+  Telemetry
+};
