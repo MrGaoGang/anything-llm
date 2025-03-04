@@ -14,6 +14,7 @@ import paths from "@/utils/paths";
 import Appearance from "@/models/appearance";
 import useTextSize from "@/hooks/useTextSize";
 import { v4 } from "uuid";
+import { useTranslation } from "react-i18next";
 import { useChatMessageAlignment } from "@/hooks/useChatMessageAlignment";
 import './index.scss';
 import { useAppName } from "@/hooks/useAppName";
@@ -26,6 +27,7 @@ export default function ChatHistory({
   regenerateAssistantMessage,
   hasAttachments = false,
 }) {
+  const { t } = useTranslation();
   const lastScrollTopRef = useRef(0);
   const { user } = useUser();
   const { threadSlug = null } = useParams();
