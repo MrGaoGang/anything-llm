@@ -75,14 +75,14 @@ export default function UserButton() {
                 onClick={handleOpenAccountModal}
                 className="border-none text-white hover:bg-theme-action-menu-item-hover w-full text-left px-4 py-1.5 rounded-md"
               >
-                Account
+                账户信息
               </button>
             )}
             <a
               href={supportEmail}
               className="text-white hover:bg-theme-action-menu-item-hover w-full text-left px-4 py-1.5 rounded-md"
             >
-              Support
+              技术支持
             </a>
             <button
               onClick={() => {
@@ -94,7 +94,7 @@ export default function UserButton() {
               type="button"
               className="text-white hover:bg-theme-action-menu-item-hover w-full text-left px-4 py-1.5 rounded-md"
             >
-              Sign out
+             退出登录
             </button>
           </div>
         </div>
