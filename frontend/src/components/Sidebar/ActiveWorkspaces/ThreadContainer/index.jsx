@@ -129,7 +129,7 @@ export default function ThreadContainer({ workspace }) {
         idx={0}
         activeIdx={activeThreadIdx}
         isActive={activeThreadIdx === 0}
-        thread={{ slug: null, name: "default" }}
+        thread={{ slug: null, name: "默认会话" }}
         hasNext={threads.length > 0}
       />
       {threads.map((thread, i) => (
@@ -195,11 +195,11 @@ function NewThreadButton({ workspace }) {
 
         {loading ? (
           <p className="text-left text-white light:text-theme-text-primary text-sm">
-            Starting Thread...
+            会话创建中...
           </p>
         ) : (
           <p className="text-left text-white light:text-theme-text-primary text-sm">
-            New Thread
+           点击使用新会话
           </p>
         )}
       </div>
