@@ -5,9 +5,28 @@ import WorkspaceThread from "@/models/workspaceThread";
 import { v4 } from "uuid";
 import { ABORT_STREAM_EVENT } from "@/utils/chat";
 
+function fetchWithTimeout(url, options = {}, timeout = 50000) {
+  const controller = new AbortController();
+  const { signal } = controller;
+
+  const timeoutId = setTimeout(() => {
+      controller.abort();
+  }, timeout);
+
+  return fetch(url, { ...options, signal })
+      .then(response => {
+          clearTimeout(timeoutId);
+          return response;
+      })
+      .catch(error => {
+          clearTimeout(timeoutId);
+          throw error;
+      });
+}
+
 const Workspace = {
   new: async function (data = {}) {
-    const { workspace, message } = await fetch(`${API_BASE}/workspace/new`, {
+    const { workspace, message } = await fetchWithTimeout(`${API_BASE}/workspace/new`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: baseHeaders(),
@@ -20,7 +39,7 @@ const Workspace = {
     return { workspace, message };
   },
   update: async function (slug, data = {}) {
-    const { workspace, message } = await fetch(
+    const { workspace, message } = await fetchWithTimeout(
       `${API_BASE}/workspace/${slug}/update`,
       {
         method: "POST",
@@ -36,7 +55,7 @@ const Workspace = {
     return { workspace, message };
   },
   modifyEmbeddings: async function (slug, changes = {}) {
-    const { workspace, message } = await fetch(
+    const { workspace, message } = await fetchWithTimeout(
       `${API_BASE}/workspace/${slug}/update-embeddings`,
       {
         method: "POST",
@@ -52,7 +71,7 @@ const Workspace = {
     return { workspace, message };
   },
   chatHistory: async function (slug) {
-    const history = await fetch(`${API_BASE}/workspace/${slug}/chats`, {
+    const history = await fetchWithTimeout(`${API_BASE}/workspace/${slug}/chats`, {
       method: "GET",
       headers: baseHeaders(),
     })
@@ -62,7 +81,7 @@ const Workspace = {
     return history;
   },
   updateChatFeedback: async function (chatId, slug, feedback) {
-    const result = await fetch(
+    const result = await fetchWithTimeout(
       `${API_BASE}/workspace/${slug}/chat-feedback/${chatId}`,
       {
         method: "POST",
@@ -76,7 +95,7 @@ const Workspace = {
   },
 
   deleteChats: async function (slug = "", chatIds = []) {
-    return await fetch(`${API_BASE}/workspace/${slug}/delete-chats`, {
+    return await fetchWithTimeout(`${API_BASE}/workspace/${slug}/delete-chats`, {
       method: "DELETE",
       headers: baseHeaders(),
       body: JSON.stringify({ chatIds }),
@@ -201,7 +220,7 @@ const Workspace = {
     });
   },
   all: async function () {
-    const workspaces = await fetch(`${API_BASE}/workspaces`, {
+    const workspaces = await fetchWithTimeout(`${API_BASE}/workspaces`, {
       method: "GET",
       headers: baseHeaders(),
     })
@@ -212,7 +231,7 @@ const Workspace = {
     return workspaces;
   },
   bySlug: async function (slug = "") {
-    const workspace = await fetch(`${API_BASE}/workspace/${slug}`, {
+    const workspace = await fetchWithTimeout(`${API_BASE}/workspace/${slug}`, {
       headers: baseHeaders(),
     })
       .then((res) => res.json())
@@ -221,7 +240,7 @@ const Workspace = {
     return workspace;
   },
   delete: async function (slug) {
-    const result = await fetch(`${API_BASE}/workspace/${slug}`, {
+    const result = await fetchWithTimeout(`${API_BASE}/workspace/${slug}`, {
       method: "DELETE",
       headers: baseHeaders(),
     })
@@ -231,7 +250,7 @@ const Workspace = {
     return result;
   },
   wipeVectorDb: async function (slug) {
-    return await fetch(`${API_BASE}/workspace/${slug}/reset-vector-db`, {
+    return await fetchWithTimeout(`${API_BASE}/workspace/${slug}/reset-vector-db`, {
       method: "DELETE",
       headers: baseHeaders(),
     })
@@ -239,7 +258,7 @@ const Workspace = {
       .catch(() => false);
   },
   uploadFile: async function (slug, formData) {
-    const response = await fetch(`${API_BASE}/workspace/${slug}/upload`, {
+    const response = await fetchWithTimeout(`${API_BASE}/workspace/${slug}/upload`, {
       method: "POST",
       body: formData,
       headers: baseHeaders(),
@@ -249,7 +268,7 @@ const Workspace = {
     return { response, data };
   },
   uploadLink: async function (slug, link) {
-    const response = await fetch(`${API_BASE}/workspace/${slug}/upload-link`, {
+    const response = await fetchWithTimeout(`${API_BASE}/workspace/${slug}/upload-link`, {
       method: "POST",
       body: JSON.stringify({ link }),
       headers: baseHeaders(),
@@ -260,13 +279,13 @@ const Workspace = {
   },
 
   getSuggestedMessages: async function (slug) {
-    return await fetch(`${API_BASE}/workspace/${slug}/suggested-messages`, {
+    return await fetchWithTimeout(`${API_BASE}/workspace/${slug}/suggested-messages`, {
       method: "GET",
       cache: "no-cache",
       headers: baseHeaders(),
     })
       .then((res) => {
-        if (!res.ok) throw new Error("Could not fetch suggested messages.");
+        if (!res.ok) throw new Error("Could not fetchWithTimeout suggested messages.");
         return res.json();
       })
       .then((res) => res.suggestedMessages)
@@ -276,7 +295,7 @@ const Workspace = {
       });
   },
   setSuggestedMessages: async function (slug, messages) {
-    return fetch(`${API_BASE}/workspace/${slug}/suggested-messages`, {
+    return fetchWithTimeout(`${API_BASE}/workspace/${slug}/suggested-messages`, {
       method: "POST",
       headers: baseHeaders(),
       body: JSON.stringify({ messages }),
@@ -295,7 +314,7 @@ const Workspace = {
       });
   },
   setPinForDocument: async function (slug, docPath, pinStatus) {
-    return fetch(`${API_BASE}/workspace/${slug}/update-pin`, {
+    return fetchWithTimeout(`${API_BASE}/workspace/${slug}/update-pin`, {
       method: "POST",
       headers: baseHeaders(),
       body: JSON.stringify({ docPath, pinStatus }),
@@ -314,14 +333,14 @@ const Workspace = {
       });
   },
   ttsMessage: async function (slug, chatId) {
-    return await fetch(`${API_BASE}/workspace/${slug}/tts/${chatId}`, {
+    return await fetchWithTimeout(`${API_BASE}/workspace/${slug}/tts/${chatId}`, {
       method: "GET",
       cache: "no-cache",
       headers: baseHeaders(),
     })
       .then((res) => {
         if (res.ok && res.status !== 204) return res.blob();
-        throw new Error("Failed to fetch TTS.");
+        throw new Error("Failed to fetchWithTimeout TTS.");
       })
       .then((blob) => (blob ? URL.createObjectURL(blob) : null))
       .catch((e) => {
@@ -329,7 +348,7 @@ const Workspace = {
       });
   },
   uploadPfp: async function (formData, slug) {
-    return await fetch(`${API_BASE}/workspace/${slug}/upload-pfp`, {
+    return await fetchWithTimeout(`${API_BASE}/workspace/${slug}/upload-pfp`, {
       method: "POST",
       body: formData,
       headers: baseHeaders(),
@@ -345,14 +364,14 @@ const Workspace = {
   },
 
   fetchPfp: async function (slug) {
-    return await fetch(`${API_BASE}/workspace/${slug}/pfp`, {
+    return await fetchWithTimeout(`${API_BASE}/workspace/${slug}/pfp`, {
       method: "GET",
       cache: "no-cache",
       headers: baseHeaders(),
     })
       .then((res) => {
         if (res.ok && res.status !== 204) return res.blob();
-        throw new Error("Failed to fetch pfp.");
+        throw new Error("Failed to fetchWithTimeout pfp.");
       })
       .then((blob) => (blob ? URL.createObjectURL(blob) : null))
       .catch((e) => {
@@ -362,7 +381,7 @@ const Workspace = {
   },
 
   removePfp: async function (slug) {
-    return await fetch(`${API_BASE}/workspace/${slug}/remove-pfp`, {
+    return await fetchWithTimeout(`${API_BASE}/workspace/${slug}/remove-pfp`, {
       method: "DELETE",
       headers: baseHeaders(),
     })
@@ -376,7 +395,7 @@ const Workspace = {
       });
   },
   _updateChatResponse: async function (slug = "", chatId, newText) {
-    return await fetch(`${API_BASE}/workspace/${slug}/update-chat`, {
+    return await fetchWithTimeout(`${API_BASE}/workspace/${slug}/update-chat`, {
       method: "POST",
       headers: baseHeaders(),
       body: JSON.stringify({ chatId, newText }),
@@ -391,7 +410,7 @@ const Workspace = {
       });
   },
   _deleteEditedChats: async function (slug = "", startingId) {
-    return await fetch(`${API_BASE}/workspace/${slug}/delete-edited-chats`, {
+    return await fetchWithTimeout(`${API_BASE}/workspace/${slug}/delete-edited-chats`, {
       method: "DELETE",
       headers: baseHeaders(),
       body: JSON.stringify({ startingId }),
@@ -406,7 +425,7 @@ const Workspace = {
       });
   },
   deleteChat: async (chatId) => {
-    return await fetch(`${API_BASE}/workspace/workspace-chats/${chatId}`, {
+    return await fetchWithTimeout(`${API_BASE}/workspace/workspace-chats/${chatId}`, {
       method: "PUT",
       headers: baseHeaders(),
     })
@@ -417,7 +436,7 @@ const Workspace = {
       });
   },
   forkThread: async function (slug = "", threadSlug = null, chatId = null) {
-    return await fetch(`${API_BASE}/workspace/${slug}/thread/fork`, {
+    return await fetchWithTimeout(`${API_BASE}/workspace/${slug}/thread/fork`, {
       method: "POST",
       headers: baseHeaders(),
       body: JSON.stringify({ threadSlug, chatId }),
@@ -439,7 +458,7 @@ const Workspace = {
    * @returns {Promise<{response: {ok: boolean}, data: {success: boolean, error: string|null, document: {id: string, location:string}|null}}>}
    */
   uploadAndEmbedFile: async function (slug, formData) {
-    const response = await fetch(
+    const response = await fetchWithTimeout(
       `${API_BASE}/workspace/${slug}/upload-and-embed`,
       {
         method: "POST",
@@ -459,7 +478,7 @@ const Workspace = {
    * @returns {Promise<boolean>}
    */
   deleteAndUnembedFile: async function (slug, documentLocation) {
-    const response = await fetch(
+    const response = await fetchWithTimeout(
       `${API_BASE}/workspace/${slug}/remove-and-unembed`,
       {
         method: "DELETE",
