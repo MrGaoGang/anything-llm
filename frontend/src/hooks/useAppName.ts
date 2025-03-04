@@ -11,9 +11,7 @@ export function useAppName(): string {
     const [appName, setCustomAppName] = useState('');
     useEffect(() => {
       const fetchCustomAppName = async () => {
-        const { appName } = await System.fetchCustomAppName();
-        console.log(appName, '==========appName====');
-        
+        const { appName } = await System.fetchCustomAppName();        
         setCustomAppName(appName || "");
       };
       fetchCustomAppName();
