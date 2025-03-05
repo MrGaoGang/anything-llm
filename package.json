@@ -30,7 +30,11 @@
     "docker:build": "cd docker && sh ./build.sh dev",
     "docker:stop": "cd docker && docker-compose down",
     "docker:logs": "cd docker && docker-compose logs -f",
-    "docker:start": "cd docker && sh ./start.sh"
+    "docker:start": "cd docker && sh ./start.sh",
+    "dev:all": "npx concurrently \"pnpm run dev:server\" \"pnpm run dev:collector\" \"pnpm run dev:frontend\""
   },
-  "private": false
+  "private": false,
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
 }
